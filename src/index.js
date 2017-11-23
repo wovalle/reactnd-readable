@@ -9,8 +9,15 @@ import registerServiceWorker from './registerServiceWorker';
 import App from './App';
 import './index.css';
 
-const store = createStore(reducers);
+const initialState = {
+  comments: []
+};
 
+const store = createStore(
+  reducers,
+  initialState,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+);
 
 ReactDOM.render(
   <Provider store={store}>
