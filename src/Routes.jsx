@@ -1,14 +1,15 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 
-import App from './components/shared/App';
-import NotFound from './components/shared/NotFound';
+import DefaultLayout from './components/shared/DefaultLayout';
+import App from './components/shared/App.jsx';
+import NotFound from './components/shared/NotFound.jsx';
 
 const Routes = () => {
   return (
     <Switch>
-      <Route exact path="/" component={App} />
-      <Route component={NotFound} />
+      <DefaultLayout exact path="/" component={App} />
+      <DefaultLayout component={NotFound} />
     </Switch>
   );
 }
