@@ -11,8 +11,8 @@ export const getComments = () => {
     }
 }
 
-export const getAsyncComments = () => {
-    return (dispatch, getState) => {
+export const getAsyncComments = (dispatch, getState) => {
+    return () => {
         console.log('mira manin, soy un estado', getState())
         dispatch({
             type: actions.GET_COMMENTS,
