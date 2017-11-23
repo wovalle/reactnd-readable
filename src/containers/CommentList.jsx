@@ -10,10 +10,7 @@ class CommentList extends Component {
   }
 
   getComments() {
-    // return () => {
-      console.log('manin, pero klk')
-      this.props.getAsyncComments();
-    // }
+    this.props.getAsyncComments();
   }
 
   render() {
