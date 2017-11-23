@@ -10,7 +10,6 @@ import createHistory from 'history/createBrowserHistory';
 import reducers from './reducers/';
 import registerServiceWorker from './registerServiceWorker';
 import Routes from './Routes';
-import './index.css';
 
 const initialState = {
   comments: []
