@@ -7,7 +7,7 @@ import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 const DefaultLayout = ({ component: Component, ...rest }) => {
   return (
     <Route {...rest} render={matchProps => (
-      <div role="main" className="container">
+      <div role="main" className="container pt-5">
         <Component {...matchProps} />
       </div>
     )} />
