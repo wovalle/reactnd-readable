@@ -26,17 +26,19 @@ class PostList extends Component {
             <table className="table table-hover">
               <thead>
                 <tr className="d-flex">
-                  <th scope="col" className="col-7">Title</th>
+                  <th scope="col" className="col-6">Title</th>
                   <th scope="col" className="col-3">Author</th>
                   <th scope="col" className="col-1">Date</th>
+                  <th scope="col" className="col-1">Comments</th>
                   <th scope="col" className="col-1">Score</th>
                 </tr>
               </thead>
               <tbody>
                 <tr className="d-flex">
-                  <td className="col-7">Mark</td>
+                  <td className="col-6">Mark</td>
                   <td className="col-3">Mark</td>
                   <td className="col-1">25-12-17</td>
+                  <td className="col-1">45</td>
                   <td className="col-1">4</td>
                 </tr>
               </tbody>
