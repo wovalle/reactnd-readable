@@ -10,7 +10,7 @@ class Post extends Component {
           <div className="row">
             <div className="col-md-8">
               <h2>Title about stuff</h2>
-              <h6>Posted by La nalga tuya on Nov 27, 2017 at 23:34</h6>
+              <h6>Category | Posted by Whatever on Nov 27, 2017 at 23:34</h6>
             </div>
             <div className="col-md-2 offset-md-2">
               <div className="vote-count float-right">
@@ -34,7 +34,7 @@ class Post extends Component {
             <div className="col-md-12 post-body">
               <p className="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Negat esse eam, inquit, propter se expetendam. Quo plebiscito decreta a senatu est consuli quaestio Cn. <mark>Eam stabilem appellas.</mark> Quid enim possumus hoc agere divinius? Mene ergo et Triarium dignos existimas, apud quos turpiter loquare? Duo Reges: constructio interrete. </p>
 
-              <p className="text-justify"><b>Non laboro, inquit, de nomine.</b> <b>Is es profecto tu.</b> Hoc loco discipulos quaerere videtur, ut, qui asoti esse velint, philosophi ante fiant. <a href='http://loripsum.net/' target='_blank'>Hoc ipsum elegantius poni meliusque potuit.</a> <a href='http://loripsum.net/' target='_blank'>Quid dubitas igitur mutare principia naturae?</a> Est tamen ea secundum naturam multoque nos ad se expetendam magis hortatur quam superiora omnia. <b>Primum divisit ineleganter;</b> <a href='http://loripsum.net/' target='_blank'>Quare conare, quaeso.</a> <a href='http://loripsum.net/' target='_blank'>Perge porro;</a> Videmus igitur ut conquiescere ne infantes quidem possint. <i>Nunc omni virtuti vitium contrario nomine opponitur.</i> <mark>Suo genere perveniant ad extremum;</mark> </p>
+              <p className="text-justify"><b>Non laboro, inquit, de nomine.</b> <b>Is es profecto tu.</b> Hoc loco discipulos quaerere videtur, ut, qui asoti esse velint, philosophi ante fiant. <a href='http://loripsum.net/' target='_blank rel=:noopener:'>Hoc ipsum elegantius poni meliusque potuit.</a> <a href='http://loripsum.net/' target='_blank rel=:noopener:'>Quid dubitas igitur mutare principia naturae?</a> Est tamen ea secundum naturam multoque nos ad se expetendam magis hortatur quam superiora omnia. <b>Primum divisit ineleganter;</b> <a href='http://loripsum.net/' target='_blank rel=:noopener:'>Quare conare, quaeso.</a> <a href='http://loripsum.net/' target='_blank rel=:noopener:'>Perge porro;</a> Videmus igitur ut conquiescere ne infantes quidem possint. <i>Nunc omni virtuti vitium contrario nomine opponitur.</i> <mark>Suo genere perveniant ad extremum;</mark> </p>
 
               <p className="text-justify">Omnes enim iucundum motum, quo sensus hilaretur. Illud dico, ea, quae dicat, praeclare inter se cohaerere. Totum autem id externum est, et quod externum, id in casu est. <i>Omnia contraria, quos etiam insanos esse vultis.</i> </p>
             </div>
