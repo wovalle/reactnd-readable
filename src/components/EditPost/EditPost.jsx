@@ -5,10 +5,6 @@ import './EditPost.css';
 import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 class EditPost extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="edit-post">
