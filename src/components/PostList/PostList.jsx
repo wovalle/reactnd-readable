@@ -7,8 +7,8 @@ class PostList extends Component {
     return (
       <div className="post-list">
         <div className="row">
-          <div className="col-md-9">
-            <label htmlFor="categories">Categories:</label>
+          <div className="col-md-9 col-xs-6">
+            <label htmlFor="categories" className="pr-1">Categories:</label>
             <select className="custom-select" id="categories">
               <option value="*">All</option>
               <option value="1">Cat 1</option>
@@ -16,14 +16,14 @@ class PostList extends Component {
               <option value="3">Cat 3 really long</option>
             </select>
           </div>
-          <div className="col-md-3">
+          <div className="col-md-3 col-xs-6">
             <button type="button" className="btn btn-outline-primary float-right">Create New Post</button>
           </div>
         </div>
 
         <div className="row">
           <div className="col-md-12">
-            <table className="table table-hover">
+            <table className="my-2 table table-hover">
               <thead>
                 <tr className="d-flex">
                   <th scope="col" className="col-6">Title</th>
