@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 
-import './PostList.css';
-
+// Sorting https://codepen.io/jtrumbull/pen/yNwMQr
 class PostList extends Component {
+  componentDidMount() {
+    
+  }
+
   render() {
     return (
-      <div className="post-list">
+      <div className="pt-3">
         <div className="row">
           <div className="col-md-9 col-xs-6">
             <label htmlFor="categories" className="pr-1">Categories:</label>

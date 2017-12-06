@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 
 import DefaultLayout from './components/shared/DefaultLayout';
-import PostList from './components/PostList/PostList';
+import PostList from './containers/PostList';
 import Post from './components/Post/Post';
 import EditPost from './components/EditPost/EditPost';
 import NotFound from './components/shared/NotFound.jsx';
