@@ -6,18 +6,43 @@ import { bindActionCreators } from 'redux';
 import * as postActions from '../actions/posts.actions';
 // TODO: Sorting https://codepen.io/jtrumbull/pen/yNwMQr
 class PostList extends Component {
+  state = {
+    category: ''
+  }
+
   componentDidMount() {
     this.props.postActions.getCategories();
+    this.props.postActions.getPosts();
+  }
+
+  filterByCategory = (e) => {
+    const category = e.target.value;
+    this.setState({ category });
+    this.props.postActions.getPosts(category);
   }
 
   render() {
     const all = {
       name: 'All',
-      id: '*'
+      id: ''
     };
 
     const categories = [all, ...this.props.categories].map(c => (
-      <option key={c.id} value={c.path}>{c.name}</option>
+      <option key={c.id} value={c.id}>{c.name}</option>
+    ));
+
+    const posts = this.state.category ?
+      this.props.posts.filter(p => p.category === this.state.category) :
+      this.props.posts;
+
+    const postRows = posts.map(p => (
+      <tr className="d-flex" key={p.id}>
+        <td className="col-5">{p.title}</td>
+        <td className="col-3">{p.author}</td>
+        <td className="col-2">{new Date(p.timestamp).toISOString().slice(0, 10)}</td>
+        <td className="col-1">{p.commentCount}</td>
+        <td className="col-1">{p.voteScore}</td>
+      </tr>
     ));
 
     return (
@@ -25,7 +50,7 @@ class PostList extends Component {
         <div className="row">
           <div className="col-md-9 col-xs-6">
             <label htmlFor="categories" className="pr-1">Categories:</label>
-            <select className="custom-select" id="categories">
+            <select className="custom-select" id="categories" onChange={this.filterByCategory}>
               {categories}
             </select>
           </div>
@@ -39,21 +64,15 @@ class PostList extends Component {
             <table className="my-2 table table-hover">
               <thead>
                 <tr className="d-flex">
-                  <th scope="col" className="col-6">Title</th>
+                  <th scope="col" className="col-5">Title</th>
                   <th scope="col" className="col-3">Author</th>
-                  <th scope="col" className="col-1">Date</th>
+                  <th scope="col" className="col-2">Date</th>
                   <th scope="col" className="col-1">Comments</th>
                   <th scope="col" className="col-1">Score</th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="d-flex">
-                  <td className="col-6">Mark</td>
-                  <td className="col-3">Mark</td>
-                  <td className="col-1">25-12-17</td>
-                  <td className="col-1">45</td>
-                  <td className="col-1">4</td>
-                </tr>
+                { postRows }
               </tbody>
             </table>
           </div>
@@ -66,10 +85,13 @@ class PostList extends Component {
 PostList.propTypes = {
   postActions: propTypes.object.isRequired,
   categories: propTypes.array.isRequired,
+  posts: propTypes.array.isRequired,
 };
 
+// TODO: [OUTOFSCOPE] memoized selectors
 const mapStateToProps = (state) => ({
   categories: Object.keys(state.categories).map(k => state.categories[k]),
+  posts: Object.keys(state.posts).map(k => state.posts[k]),
 });
 
 const mapDispatchToProps = (dispatch) => ({

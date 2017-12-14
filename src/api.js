@@ -1,6 +1,6 @@
 import * as http from './utils/http.helper';
 
-const url = 'http://localhost:3001';
+const baseUrl = 'http://localhost:3001';
 
 let token = localStorage.token
 if (!token)
@@ -12,5 +12,10 @@ const headers = {
 }
 
 export const getCategories = () => {
-  return http.getJson(`${url}/categories`, { headers });
+  return http.getJson(`${baseUrl}/categories`, { headers });
+};
+
+export const getPosts = (category) => {
+  let postUrl = category ? `${category}/posts` : 'posts';
+  return http.getJson(`${baseUrl}/${postUrl}`, { headers });
 };

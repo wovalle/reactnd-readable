@@ -2,7 +2,7 @@ import { normalize } from 'normalizr';
 
 import actions from '../constants/actions';
 
-export const getCategories = (dispatch, getState) => {
+export const getCategories = () => {
     return async (dispatch, _, { api, schema } ) => {
       dispatch({ type: actions.categories.get });
       
@@ -17,4 +17,18 @@ export const getCategories = (dispatch, getState) => {
         categories
       });
     }
+}
+
+export const getPosts = (category = '') => {
+  return async (dispatch, _, { api, schema } ) => {
+    dispatch({ type: actions.posts.get });
+    
+    const posts = await api.getPosts(category);
+    
+    dispatch({
+      type: actions.entities.add,
+      payload: normalize(posts, schema.posts),
+      posts
+    });
+  }
 }

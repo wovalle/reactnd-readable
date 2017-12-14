@@ -6,5 +6,10 @@ export default {
     get: 'categories.get',
     success: 'categories.success',
     error: 'categories.error',
+  },
+  posts: {
+    get: 'posts.get',
+    success: 'posts.success',
+    error: 'posts.error',
   }
 }
