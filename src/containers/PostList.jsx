@@ -19,6 +19,7 @@ class PostList extends Component {
   filterByCategory = (e) => {
     const category = e.target.value;
     this.setState({ category });
+    // Optimist approach, first filter and then do a roundtrip to api
     this.props.postActions.getPosts(category);
   }
 

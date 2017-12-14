@@ -11,5 +11,10 @@ export default {
     get: 'posts.get',
     success: 'posts.success',
     error: 'posts.error',
+  },
+  comments: {
+    get: 'comments.get',
+    success: 'comments.success',
+    error: 'comments.error',
   }
 }

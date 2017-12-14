@@ -19,3 +19,11 @@ export const getPosts = (category) => {
   let postUrl = category ? `${category}/posts` : 'posts';
   return http.getJson(`${baseUrl}/${postUrl}`, { headers });
 };
+
+export const getPost = (id) => {
+  return http.getJson(`${baseUrl}/posts/${id}`, { headers });
+};
+
+export const getComments = (id) => {
+  return http.getJson(`${baseUrl}/posts/${id}/comments`, { headers });
+};

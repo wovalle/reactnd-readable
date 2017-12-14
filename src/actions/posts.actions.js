@@ -1,5 +1,5 @@
 import { normalize } from 'normalizr';
-
+import { getComments } from './comments.actions';
 import actions from '../constants/actions';
 
 export const getCategories = () => {
@@ -30,5 +30,21 @@ export const getPosts = (category = '') => {
       payload: normalize(posts, schema.posts),
       posts
     });
+  }
+}
+
+export const getPost = (id) => {
+  return async (dispatch, _, { api, schema } ) => {
+    dispatch({ type: actions.posts.get });
+    
+    const post = await api.getPost(id);
+    
+    dispatch({
+      type: actions.entities.add,
+      payload: normalize(post, schema.post),
+      post
+    });
+
+    dispatch(getComments(id));
   }
 }
