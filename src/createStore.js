@@ -4,17 +4,22 @@ import { routerMiddleware } from 'react-router-redux';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 
 import reducers from './reducers/';
+import * as api from './api';
+import * as schema from './normalizr.schema';
 
 const initialState = {
-  comments: []
+  comments: [],
+  categories: {}
 };
+
+const thunkWithExtras = thunk.withExtraArgument({ api, schema });
 
 const configureStoreDev = (params) => {
   const reactRouterMiddleware = routerMiddleware(params.history);
 
   const middlewares = [
     reduxImmutableStateInvariant(),
-    thunk,
+    thunkWithExtras,
     reactRouterMiddleware
   ];
 
@@ -36,7 +41,7 @@ const configureStoreProd = (params) => {
   const reactRouterMiddleware = routerMiddleware(params.history);
   
   const middlewares = [
-    thunk,
+    thunkWithExtras,
     reactRouterMiddleware
   ];
 

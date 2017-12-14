@@ -1,22 +1,32 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import propTypes from 'prop-types'
+import { bindActionCreators } from 'redux';
 
-// Sorting https://codepen.io/jtrumbull/pen/yNwMQr
+import * as postActions from '../actions/posts.actions';
+// TODO: Sorting https://codepen.io/jtrumbull/pen/yNwMQr
 class PostList extends Component {
   componentDidMount() {
-    
+    this.props.postActions.getCategories();
   }
 
   render() {
+    const all = {
+      name: 'All',
+      id: '*'
+    };
+
+    const categories = [all, ...this.props.categories].map(c => (
+      <option key={c.id} value={c.path}>{c.name}</option>
+    ));
+
     return (
       <div className="pt-3">
         <div className="row">
           <div className="col-md-9 col-xs-6">
             <label htmlFor="categories" className="pr-1">Categories:</label>
             <select className="custom-select" id="categories">
-              <option value="*">All</option>
-              <option value="1">Cat 1</option>
-              <option value="2">Cat 2</option>
-              <option value="3">Cat 3 really long</option>
+              {categories}
             </select>
           </div>
           <div className="col-md-3 col-xs-6">
@@ -53,4 +63,17 @@ class PostList extends Component {
   }
 }
 
-export default PostList;
+PostList.propTypes = {
+  postActions: propTypes.object.isRequired,
+  categories: propTypes.array.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  categories: Object.keys(state.categories).map(k => state.categories[k]),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  postActions: bindActionCreators(postActions, dispatch) 
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostList);
