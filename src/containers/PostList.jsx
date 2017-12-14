@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import propTypes from 'prop-types'
 import { bindActionCreators } from 'redux';
+import { Link } from "react-router-dom";
 
 import * as postActions from '../actions/posts.actions';
 // TODO: Sorting https://codepen.io/jtrumbull/pen/yNwMQr
@@ -37,7 +38,7 @@ class PostList extends Component {
 
     const postRows = posts.map(p => (
       <tr className="d-flex" key={p.id}>
-        <td className="col-5">{p.title}</td>
+        <td className="col-5"><Link to={`post/${p.id}`}>{p.title}</Link></td>
         <td className="col-3">{p.author}</td>
         <td className="col-2">{new Date(p.timestamp).toISOString().slice(0, 10)}</td>
         <td className="col-1">{p.commentCount}</td>
@@ -55,7 +56,7 @@ class PostList extends Component {
             </select>
           </div>
           <div className="col-md-3 col-xs-6">
-            <button type="button" className="btn btn-outline-primary float-right">Create New Post</button>
+            <Link className="btn btn-outline-primary float-right" to={'/new'}>Create New Post</Link>
           </div>
         </div>
 
