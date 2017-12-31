@@ -59,6 +59,7 @@ class EditPost extends Component {
           field="category"
           className="custom-select form-control"
           options={categories}
+          required
         />
       );
     }
@@ -72,12 +73,12 @@ class EditPost extends Component {
                 <form className="col-md-12" onSubmit={formApi.submitForm}>
                   <div className="form-group col-12">
                     <label htmlFor="title">Title</label>
-                    <Text className="form-control" id="title" field="title" placeholder="Post title" />
+                    <Text className="form-control" id="title" field="title" placeholder="Post title" required />
                   </div>
                   <div className="form-row col">
                     <div className="form-group col-6">
                       <label htmlFor="author">Author</label>
-                      <Text className="form-control" id="author" field="author" placeholder="Author" />
+                      <Text className="form-control" id="author" field="author" placeholder="Author" required />
                     </div>
                     <div className="form-group col-6">
                       <label htmlFor="category">Category</label>
@@ -89,6 +90,7 @@ class EditPost extends Component {
                       editorClassName="form-control form-editor"
                       onEditorStateChange={debounce(this.onEditorStateChange, 100)}
                       editorState={this.state.editorState}
+                      required
                     />
                   </div>
                   <div className="form-group col">

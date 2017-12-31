@@ -31,3 +31,7 @@ export const getComments = (id) => {
 export const editPost = (post) => {
   return http.putJson(`${baseUrl}/posts/${post.id}`, { headers, body: post });
 };
+
+export const createPost = (post) => {
+  return http.postJson(`${baseUrl}/posts`, { headers, body: post });
+};

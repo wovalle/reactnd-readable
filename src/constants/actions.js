@@ -12,7 +12,9 @@ export default {
     success: 'posts.success',
     error: 'posts.error',
     edit: 'posts.edit',
-    editSuccess: 'posts.edit.success'
+    editSuccess: 'posts.edit.success',
+    create: 'posts.create',
+    createSuccess: 'posts.create.success'
   },
   comments: {
     get: 'comments.get',

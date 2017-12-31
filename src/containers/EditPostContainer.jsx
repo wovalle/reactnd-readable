@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux'
 
 import EditPost from '../components/EditPost/EditPost';
-import { getPost, getCategories, editPost } from '../actions/posts.actions';
+import { getPost, editPost } from '../actions/posts.actions';
 
 class EditPostContainer extends Component {
   componentDidMount() {
@@ -17,7 +17,7 @@ class EditPostContainer extends Component {
 
   render() {
     let elem = null;
-    if (this.props.post && this.props.categories)
+    if (this.props.post)
       elem = (
         <EditPost
           post={this.props.post}
@@ -33,14 +33,12 @@ class EditPostContainer extends Component {
 
 EditPostContainer.propTypes = {
   getPost: propTypes.func.isRequired,
-  getCategories: propTypes.func.isRequired,
   editPost: propTypes.func.isRequired,
 };
 
 // TODO: [OUTOFSCOPE] memoized selectors
 const mapStateToProps = (state, props) => ({
-  post: state.posts[props.match.params.id],
-  categories: Object.keys(state.categories).map(k => state.categories[k]),
+  post: state.posts[props.match.params.id]
 });
 
-export default connect(mapStateToProps, { getPost, getCategories, editPost })(EditPostContainer);
+export default connect(mapStateToProps, { getPost, editPost })(EditPostContainer);

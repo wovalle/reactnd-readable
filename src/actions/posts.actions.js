@@ -1,6 +1,7 @@
 import { normalize } from 'normalizr';
 import { getComments } from './comments.actions';
 import actions from '../constants/actions';
+import uuidv1 from 'uuid/v1';
 
 export const getCategories = () => {
   return async (dispatch, _, { api, schema }) => {
@@ -58,6 +59,23 @@ export const editPost = (post) => {
     dispatch({
       type: actions.posts.editSuccess,
       post: editedPost
+    });
+  }
+}
+
+export const createPost = (post) => {
+  return async (dispatch, _, { api }) => {
+    dispatch({ type: actions.posts.create });
+
+    const createdPost = await api.createPost({
+      id: uuidv1(),
+      timestamp: Date.now().valueOf(),
+      ...post
+    });
+
+    dispatch({
+      type: actions.posts.createSuccess,
+      post: createdPost
     });
   }
 }
