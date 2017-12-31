@@ -3,28 +3,28 @@ import { getComments } from './comments.actions';
 import actions from '../constants/actions';
 
 export const getCategories = () => {
-    return async (dispatch, _, { api, schema } ) => {
-      dispatch({ type: actions.categories.get });
-      
-      const { categories } = await api.getCategories();
+  return async (dispatch, _, { api, schema }) => {
+    dispatch({ type: actions.categories.get });
 
-      // HACK: Normalizr wont work well if id is not present
-      categories.forEach(c => c.id = c.name);
-      
-      dispatch({
-        type: actions.entities.add,
-        payload: normalize(categories, schema.categories),
-        categories
-      });
-    }
+    const { categories } = await api.getCategories();
+
+    // HACK: Normalizr wont work well if id is not present
+    categories.forEach(c => c.id = c.name);
+
+    dispatch({
+      type: actions.entities.add,
+      payload: normalize(categories, schema.categories),
+      categories
+    });
+  }
 }
 
 export const getPosts = (category = '') => {
-  return async (dispatch, _, { api, schema } ) => {
+  return async (dispatch, _, { api, schema }) => {
     dispatch({ type: actions.posts.get });
-    
+
     const posts = await api.getPosts(category);
-    
+
     dispatch({
       type: actions.entities.add,
       payload: normalize(posts, schema.posts),
@@ -34,11 +34,11 @@ export const getPosts = (category = '') => {
 }
 
 export const getPost = (id) => {
-  return async (dispatch, _, { api, schema } ) => {
+  return async (dispatch, _, { api, schema }) => {
     dispatch({ type: actions.posts.get });
-    
+
     const post = await api.getPost(id);
-    
+
     dispatch({
       type: actions.entities.add,
       payload: normalize(post, schema.post),
@@ -46,5 +46,18 @@ export const getPost = (id) => {
     });
 
     dispatch(getComments(id));
+  }
+}
+
+export const editPost = (post) => {
+  return async (dispatch, _, { api }) => {
+    dispatch({ type: actions.posts.edit });
+
+    const editedPost = await api.editPost(post);
+
+    dispatch({
+      type: actions.posts.editSuccess,
+      post: editedPost
+    });
   }
 }

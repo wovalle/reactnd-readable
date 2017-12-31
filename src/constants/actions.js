@@ -11,6 +11,8 @@ export default {
     get: 'posts.get',
     success: 'posts.success',
     error: 'posts.error',
+    edit: 'posts.edit',
+    editSuccess: 'posts.edit.success'
   },
   comments: {
     get: 'comments.get',
