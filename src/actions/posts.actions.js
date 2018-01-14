@@ -50,7 +50,7 @@ export const getPost = (id) => {
   }
 }
 
-export const editPost = (post) => {
+export const editPost = (post, push) => {
   return async (dispatch, _, { api }) => {
     dispatch({ type: actions.posts.edit });
 
@@ -60,6 +60,8 @@ export const editPost = (post) => {
       type: actions.posts.editSuccess,
       post: editedPost
     });
+
+    push('/');
   }
 }
 

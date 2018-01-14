@@ -12,7 +12,7 @@ class EditPostContainer extends Component {
   }
 
   savePost = (post) => {
-    this.props.editPost(post);
+    this.props.editPost(post, this.props.history.push);
   }
 
   render() {

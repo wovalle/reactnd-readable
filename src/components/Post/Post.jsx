@@ -1,9 +1,10 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import CommentsContainer from '../CommentsContainer/CommentsContainer';
 import { Link } from 'react-router-dom';
 
-const Post = ({ post, comments }) => {
+import CommentsContainer from '../CommentsContainer/CommentsContainer';
+
+const Post = ({ post, comments, editComment }) => {
   const timestamp = new Date(post.timestamp);
   const time = timestamp.toLocaleTimeString();
   const date = timestamp.toLocaleDateString();
@@ -29,7 +30,7 @@ const Post = ({ post, comments }) => {
           <div className="col-md-12">
             <div className="actions-buttons float-right">
               <Link to={`/edit/${post.id}`} className="pr-1">edit</Link>
-              <a href="" className="pr-1" >delete</a>
+              <a href="" className="pr-1">delete</a>
             </div>
           </div>
         </div>
@@ -42,7 +43,10 @@ const Post = ({ post, comments }) => {
       </div>
       <hr />
       <div className="comments">
-        <CommentsContainer comments={comments} />
+        <CommentsContainer
+          comments={comments}
+          editComment={editComment}
+        />
       </div>
     </div>
   );
@@ -50,6 +54,7 @@ const Post = ({ post, comments }) => {
 
 Post.propTypes = {
   post: propTypes.object.isRequired,
+  editComment: propTypes.func.isRequired,
 };
 
 export default Post;
