@@ -20,5 +20,7 @@ export default {
     get: 'comments.get',
     success: 'comments.success',
     error: 'comments.error',
+    submit: 'comments.submit',
+    delete: 'comments.delete'
   }
 }

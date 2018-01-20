@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import Post from '../components/Post/Post';
 import { getPost } from '../actions/posts.actions';
-import { getComments, editComment } from '../actions/comments.actions';
+import { getComments, submitComment, deleteComment } from '../actions/comments.actions';
 
 class PostContainer extends Component {
   componentDidMount() {
@@ -21,7 +21,8 @@ class PostContainer extends Component {
       <Post
         post={this.props.post}
         comments={this.props.comments}
-        editComment={this.props.editComment}
+        submitComment={this.props.submitComment}
+        deleteComment={this.props.deleteComment}
       />
     );
     const elem = this.props.post ? post : null;
@@ -34,13 +35,17 @@ class PostContainer extends Component {
 PostContainer.propTypes = {
   getPost: propTypes.func.isRequired,
   getComments: propTypes.func.isRequired,
-  editComment: propTypes.func.isRequired,
+  submitComment: propTypes.func.isRequired,
+  deleteComment: propTypes.func.isRequired,
 };
 
 // TODO: [OUTOFSCOPE] memoized selectors
 const mapStateToProps = (state, props) => ({
   post: state.posts[props.match.params.id],
-  comments: Object.keys(state.comments).map(c => state.comments[c]).filter(c => c.parentId === props.match.params.id)
+  comments: Object.keys(state.comments)
+    .map(c => state.comments[c])
+    .filter(c => c.parentId === props.match.params.id)
+    .filter(c => !c.deleted)
 });
 
-export default connect(mapStateToProps, { getPost, getComments, editComment })(PostContainer);
+export default connect(mapStateToProps, { getPost, getComments, submitComment, deleteComment })(PostContainer);

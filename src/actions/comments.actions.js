@@ -1,5 +1,6 @@
 import { normalize } from 'normalizr';
 import actions from '../constants/actions';
+import uuidv1 from 'uuid/v1';
 
 export const getComments = (postId) => {
   return async (dispatch, _, { api, schema }) => {
@@ -15,20 +16,35 @@ export const getComments = (postId) => {
   }
 }
 
-
-export const editComment = (postId, commentId, payload) => {
+export const submitComment = (comment) => {
   return async (dispatch, _, { api, schema }) => {
-    // dispatch({ type: actions.comments.get });
+    dispatch({ type: actions.comments.submit });
+    let submittedComment = null;
 
-    // const comments = await api.getComments(postId);
+    if (comment.editing) {
+      submittedComment = await api.editComment(comment);
+    } else {
+      const id = uuidv1();
+      submittedComment = await api.saveComment({ ...comment, id, timestamp: Date.now() });
+    }
 
-    // dispatch({
-    //   type: actions.entities.add,
-    //   payload: normalize(comments, schema.comments),
-    //   comments
-    // });
+    dispatch({
+      type: actions.entities.add,
+      payload: normalize(submittedComment, schema.comment)
+    });
+  }
+}
 
-    console.log('lol', postId, commentId, payload);
+export const deleteComment = (comment) => {
+  return async (dispatch, _, { api, schema }) => {
+    dispatch({ type: actions.comments.delete });
+
+    const deletedComment = await api.deleteComment(comment);
+
+    dispatch({
+      type: actions.entities.add,
+      payload: normalize(deletedComment, schema.comment)
+    });
   }
 }
 

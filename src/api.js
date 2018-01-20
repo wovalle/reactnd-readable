@@ -35,3 +35,15 @@ export const editPost = (post) => {
 export const createPost = (post) => {
   return http.postJson(`${baseUrl}/posts`, { headers, body: post });
 };
+
+export const editComment = (comment) => {
+  return http.putJson(`${baseUrl}/comments/${comment.id}`, { headers, body: comment });
+};
+
+export const saveComment = (comment) => {
+  return http.postJson(`${baseUrl}/comments`, { headers, body: comment });
+};
+
+export const deleteComment = (comment) => {
+  return http.deleteJson(`${baseUrl}/comments/${comment.id}`, { headers });
+};

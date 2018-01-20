@@ -4,10 +4,14 @@ import { Link } from 'react-router-dom';
 
 import CommentsContainer from '../CommentsContainer/CommentsContainer';
 
-const Post = ({ post, comments, editComment }) => {
+const Post = ({ post, comments, submitComment, deleteComment }) => {
   const timestamp = new Date(post.timestamp);
   const time = timestamp.toLocaleTimeString();
   const date = timestamp.toLocaleDateString();
+
+  const onSubmitComment = (payload) => {
+    submitComment({ ...payload, parentId: post.id });
+  }
 
   return (
     <div className="post">
@@ -45,7 +49,8 @@ const Post = ({ post, comments, editComment }) => {
       <div className="comments">
         <CommentsContainer
           comments={comments}
-          editComment={editComment}
+          submitComment={onSubmitComment}
+          deleteComment={deleteComment}
         />
       </div>
     </div>
@@ -54,7 +59,8 @@ const Post = ({ post, comments, editComment }) => {
 
 Post.propTypes = {
   post: propTypes.object.isRequired,
-  editComment: propTypes.func.isRequired,
+  submitComment: propTypes.func.isRequired,
+  deleteComment: propTypes.func.isRequired,
 };
 
 export default Post;
