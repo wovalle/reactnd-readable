@@ -74,7 +74,7 @@ class PostList extends Component {
                 </tr>
               </thead>
               <tbody>
-                { postRows }
+                {postRows}
               </tbody>
             </table>
           </div>
@@ -93,11 +93,11 @@ PostList.propTypes = {
 // TODO: [OUTOFSCOPE] memoized selectors
 const mapStateToProps = (state) => ({
   categories: Object.keys(state.categories).map(k => state.categories[k]),
-  posts: Object.keys(state.posts).map(k => state.posts[k]),
+  posts: Object.keys(state.posts).map(k => state.posts[k]).filter(p => !p.deleted),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  postActions: bindActionCreators(postActions, dispatch) 
+  postActions: bindActionCreators(postActions, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostList);

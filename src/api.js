@@ -32,6 +32,10 @@ export const editPost = (post) => {
   return http.putJson(`${baseUrl}/posts/${post.id}`, { headers, body: post });
 };
 
+export const deletePost = (post) => {
+  return http.deleteJson(`${baseUrl}/posts/${post.id}`, { headers });
+};
+
 export const createPost = (post) => {
   return http.postJson(`${baseUrl}/posts`, { headers, body: post });
 };

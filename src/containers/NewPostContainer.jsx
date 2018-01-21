@@ -12,7 +12,7 @@ class NewPostContainer extends Component {
   }
 
   savePost = (post) => {
-    this.props.createPost(post);
+    this.props.createPost(post, this.props.history.push);
   }
 
   render() {

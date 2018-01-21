@@ -4,13 +4,21 @@ import { Link } from 'react-router-dom';
 
 import CommentsContainer from '../CommentsContainer/CommentsContainer';
 
-const Post = ({ post, comments, submitComment, deleteComment }) => {
+const Post = ({ post, comments, deletePost, submitComment, deleteComment }) => {
   const timestamp = new Date(post.timestamp);
   const time = timestamp.toLocaleTimeString();
   const date = timestamp.toLocaleDateString();
 
   const onSubmitComment = (payload) => {
     submitComment({ ...payload, parentId: post.id });
+  }
+
+  const deleteCurrentPost = (e) => {
+    e.preventDefault();
+
+    if (window.confirm('Do you really want to delete this post?')) {
+      deletePost(post);
+    }
   }
 
   return (
@@ -34,7 +42,7 @@ const Post = ({ post, comments, submitComment, deleteComment }) => {
           <div className="col-md-12">
             <div className="actions-buttons float-right">
               <Link to={`/edit/${post.id}`} className="pr-1">edit</Link>
-              <a href="" className="pr-1">delete</a>
+              <a href="#" onClick={deleteCurrentPost} className="pr-1">delete</a>
             </div>
           </div>
         </div>

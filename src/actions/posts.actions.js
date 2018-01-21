@@ -65,7 +65,22 @@ export const editPost = (post, push) => {
   }
 }
 
-export const createPost = (post) => {
+export const deletePost = (post, push) => {
+  return async (dispatch, _, { api, schema }) => {
+    dispatch({ type: actions.posts.delete });
+
+    const deletedPost = await api.deletePost(post);
+
+    dispatch({
+      type: actions.entities.add,
+      payload: normalize({ ...deletedPost, deleted: true }, schema.post)
+    });
+
+    push('/');
+  }
+}
+
+export const createPost = (post, push) => {
   return async (dispatch, _, { api }) => {
     dispatch({ type: actions.posts.create });
 
@@ -79,5 +94,7 @@ export const createPost = (post) => {
       type: actions.posts.createSuccess,
       post: createdPost
     });
+
+    push('/');
   }
 }

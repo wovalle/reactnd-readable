@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux'
 
 import Post from '../components/Post/Post';
-import { getPost } from '../actions/posts.actions';
+import { getPost, deletePost } from '../actions/posts.actions';
 import { getComments, submitComment, deleteComment } from '../actions/comments.actions';
 
 class PostContainer extends Component {
@@ -21,6 +21,7 @@ class PostContainer extends Component {
       <Post
         post={this.props.post}
         comments={this.props.comments}
+        deletePost={(post) => this.props.deletePost(post, this.props.history.push)}
         submitComment={this.props.submitComment}
         deleteComment={this.props.deleteComment}
       />
@@ -34,6 +35,7 @@ class PostContainer extends Component {
 
 PostContainer.propTypes = {
   getPost: propTypes.func.isRequired,
+  deletePost: propTypes.func.isRequired,
   getComments: propTypes.func.isRequired,
   submitComment: propTypes.func.isRequired,
   deleteComment: propTypes.func.isRequired,
@@ -48,4 +50,4 @@ const mapStateToProps = (state, props) => ({
     .filter(c => !c.deleted)
 });
 
-export default connect(mapStateToProps, { getPost, getComments, submitComment, deleteComment })(PostContainer);
+export default connect(mapStateToProps, { getPost, deletePost, getComments, submitComment, deleteComment })(PostContainer);

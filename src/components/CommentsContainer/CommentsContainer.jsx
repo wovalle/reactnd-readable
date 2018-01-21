@@ -44,12 +44,14 @@ class CommentsContainer extends Component {
   }
 
   clearCommentBox = () => {
-    this.setState({
-      body: '',
-      author: '',
-      id: '',
-      editing: false
-    });
+    return () => {
+      this.setState({
+        body: '',
+        author: '',
+        id: '',
+        editing: false
+      });
+    }
   }
 
   render() {
@@ -88,7 +90,7 @@ class CommentsContainer extends Component {
                 <input type="text" className="form-control" id="author" placeholder="Author Name" value={this.state.author} onChange={this.onInputChange} required />
               </div>
               <button type="submit" className="btn btn-primary float-right ml-2">Submit</button>
-              <button type="button" onClick={() => this.clearCommentBox()} className="btn btn btn-outline-danger float-right">Clear</button>
+              <button type="button" onClick={this.clearCommentBox} className="btn btn btn-outline-danger float-right">Clear</button>
             </form>
           </div>
         </div>

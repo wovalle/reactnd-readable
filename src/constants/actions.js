@@ -14,7 +14,8 @@ export default {
     edit: 'posts.edit',
     editSuccess: 'posts.edit.success',
     create: 'posts.create',
-    createSuccess: 'posts.create.success'
+    createSuccess: 'posts.create.success',
+    delete: 'posts.delete'
   },
   comments: {
     get: 'comments.get',
