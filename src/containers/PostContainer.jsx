@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import Post from '../components/Post/Post';
 import { getPost, deletePost, votePost } from '../actions/posts.actions';
-import { getComments, submitComment, deleteComment } from '../actions/comments.actions';
+import { getComments, submitComment, deleteComment, voteComment } from '../actions/comments.actions';
 
 class PostContainer extends Component {
   componentDidMount() {
@@ -25,6 +25,7 @@ class PostContainer extends Component {
         submitComment={this.props.submitComment}
         deleteComment={this.props.deleteComment}
         votePost={this.props.votePost}
+        voteComment={this.props.voteComment}
       />
     );
     const elem = this.props.post ? post : null;
@@ -41,6 +42,7 @@ PostContainer.propTypes = {
   submitComment: propTypes.func.isRequired,
   deleteComment: propTypes.func.isRequired,
   votePost: propTypes.func.isRequired,
+  voteComment: propTypes.func.isRequired,
 };
 
 // TODO: [OUTOFSCOPE] memoized selectors
@@ -58,7 +60,8 @@ const mapDispatchToProps = {
   getComments,
   submitComment,
   deleteComment,
-  votePost
+  votePost,
+  voteComment,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostContainer);

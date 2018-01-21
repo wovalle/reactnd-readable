@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import CommentsContainer from '../CommentsContainer/CommentsContainer';
 
-const Post = ({ post, comments, deletePost, submitComment, deleteComment, votePost }) => {
+const Post = ({ post, comments, deletePost, submitComment, deleteComment, votePost, voteComment }) => {
   const timestamp = new Date(post.timestamp);
   const time = timestamp.toLocaleTimeString();
   const date = timestamp.toLocaleDateString();
@@ -65,6 +65,7 @@ const Post = ({ post, comments, deletePost, submitComment, deleteComment, votePo
           comments={comments}
           submitComment={onSubmitComment}
           deleteComment={deleteComment}
+          voteComment={voteComment}
         />
       </div>
     </div>
@@ -76,6 +77,7 @@ Post.propTypes = {
   submitComment: propTypes.func.isRequired,
   deleteComment: propTypes.func.isRequired,
   votePost: propTypes.func.isRequired,
+  voteComment: propTypes.func.isRequired,
 };
 
 export default Post;

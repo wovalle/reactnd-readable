@@ -56,3 +56,8 @@ export const saveComment = (comment) => {
 export const deleteComment = (comment) => {
   return http.deleteJson(`${baseUrl}/comments/${comment.id}`, { headers });
 };
+
+export const voteComment = (comment, upVote) => {
+  const option = upVote ? "upVote" : "downVote";
+  return http.postJson(`${baseUrl}/comments/${comment.id}`, { headers, body: { option } });
+};

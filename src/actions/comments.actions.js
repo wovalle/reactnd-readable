@@ -48,4 +48,15 @@ export const deleteComment = (comment) => {
   }
 }
 
+export const voteComment = (comment, upVote) => {
+  return async (dispatch, _, { api, schema }) => {
+    dispatch({ type: actions.comments.vote });
 
+    const editedComment = await api.voteComment(comment, upVote);
+
+    dispatch({
+      type: actions.entities.add,
+      payload: normalize(editedComment, schema.comment)
+    });
+  }
+}

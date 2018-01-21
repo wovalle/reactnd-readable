@@ -20,6 +20,12 @@ class CommentsContainer extends Component {
     }
   }
 
+  voteCurrentComment = (comment, up) => {
+    return (e) => {
+      this.props.voteComment(comment, up);
+    }
+  }
+
   onInputChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value,
@@ -54,15 +60,16 @@ class CommentsContainer extends Component {
 
   render() {
     const { comments } = this.props;
+
     const commentElems = comments.map(c => (
       <div className="comment media mb-4" key={c.id}>
         <div className="media-body">
           <div className="header">
             <h5 className="t-0 d-inline">{c.author}</h5>
             <div className="vote-count d-inline pl-4">
-              <i className="fa fa-chevron-up" aria-hidden="true"></i>
+              <i onClick={this.voteCurrentComment(c, true)} className="fa fa-chevron-up" aria-hidden="true"></i>
               <span className="px-1">{c.voteScore}</span>
-              <i className="fa fa-chevron-down" aria-hidden="true"></i>
+              <i onClick={this.voteCurrentComment(c, false)} className="fa fa-chevron-down" aria-hidden="true"></i>
             </div>
             <div className="actions-buttons d-inline float-right">
               <a href="#" className="pr-1" onClick={this.editComment(c)}>edit</a>
@@ -102,6 +109,7 @@ CommentsContainer.propTypes = {
   comments: propTypes.array.isRequired,
   submitComment: propTypes.func.isRequired,
   deleteComment: propTypes.func.isRequired,
+  voteComment: propTypes.func.isRequired,
 };
 
 export default CommentsContainer;
