@@ -44,14 +44,12 @@ class CommentsContainer extends Component {
   }
 
   clearCommentBox = () => {
-    return () => {
-      this.setState({
-        body: '',
-        author: '',
-        id: '',
-        editing: false
-      });
-    }
+    this.setState({
+      body: '',
+      author: '',
+      id: '',
+      editing: false
+    });
   }
 
   render() {
