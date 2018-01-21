@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux'
 
 import Post from '../components/Post/Post';
-import { getPost, deletePost } from '../actions/posts.actions';
+import { getPost, deletePost, votePost } from '../actions/posts.actions';
 import { getComments, submitComment, deleteComment } from '../actions/comments.actions';
 
 class PostContainer extends Component {
@@ -24,6 +24,7 @@ class PostContainer extends Component {
         deletePost={(post) => this.props.deletePost(post, this.props.history.push)}
         submitComment={this.props.submitComment}
         deleteComment={this.props.deleteComment}
+        votePost={this.props.votePost}
       />
     );
     const elem = this.props.post ? post : null;
@@ -39,6 +40,7 @@ PostContainer.propTypes = {
   getComments: propTypes.func.isRequired,
   submitComment: propTypes.func.isRequired,
   deleteComment: propTypes.func.isRequired,
+  votePost: propTypes.func.isRequired,
 };
 
 // TODO: [OUTOFSCOPE] memoized selectors
@@ -50,4 +52,13 @@ const mapStateToProps = (state, props) => ({
     .filter(c => !c.deleted)
 });
 
-export default connect(mapStateToProps, { getPost, deletePost, getComments, submitComment, deleteComment })(PostContainer);
+const mapDispatchToProps = {
+  getPost,
+  deletePost,
+  getComments,
+  submitComment,
+  deleteComment,
+  votePost
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostContainer);

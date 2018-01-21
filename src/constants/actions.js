@@ -15,13 +15,15 @@ export default {
     editSuccess: 'posts.edit.success',
     create: 'posts.create',
     createSuccess: 'posts.create.success',
-    delete: 'posts.delete'
+    delete: 'posts.delete',
+    vote: 'posts.vote',
   },
   comments: {
     get: 'comments.get',
     success: 'comments.success',
     error: 'comments.error',
     submit: 'comments.submit',
-    delete: 'comments.delete'
+    delete: 'comments.delete',
+    vote: 'comments.vote',
   }
 }

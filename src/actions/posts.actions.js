@@ -98,3 +98,17 @@ export const createPost = (post, push) => {
     push('/');
   }
 }
+
+export const votePost = (post, upVote) => {
+  return async (dispatch, _, { api, schema }) => {
+    dispatch({ type: actions.posts.vote });
+
+    const votedPost = await api.votePost(post, upVote);
+
+    dispatch({
+      type: actions.entities.add,
+      payload: normalize(votedPost, schema.post)
+    });
+  }
+}
+

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import CommentsContainer from '../CommentsContainer/CommentsContainer';
 
-const Post = ({ post, comments, deletePost, submitComment, deleteComment }) => {
+const Post = ({ post, comments, deletePost, submitComment, deleteComment, votePost }) => {
   const timestamp = new Date(post.timestamp);
   const time = timestamp.toLocaleTimeString();
   const date = timestamp.toLocaleDateString();
@@ -21,6 +21,12 @@ const Post = ({ post, comments, deletePost, submitComment, deleteComment }) => {
     }
   }
 
+  const voteCurrentPost = (up) => {
+    return (e) => {
+      votePost(post, up);
+    }
+  }
+
   return (
     <div className="post">
       <div className="col-md-10 offset-md-1">
@@ -31,9 +37,9 @@ const Post = ({ post, comments, deletePost, submitComment, deleteComment }) => {
           </div>
           <div className="col-md-2 offset-md-2">
             <div className="vote-count float-right">
-              <i className="fa fa-chevron-up" aria-hidden="true"></i>
-              <span className="px-1">{post.commentCount}</span>
-              <i className="fa fa-chevron-down" aria-hidden="true"></i>
+              <i onClick={voteCurrentPost(true)} className="fa fa-chevron-up" aria-hidden="true"></i>
+              <span className="px-1">{post.voteScore}</span>
+              <i onClick={voteCurrentPost(false)} className="fa fa-chevron-down" aria-hidden="true"></i>
             </div>
           </div>
         </div>
@@ -69,6 +75,7 @@ Post.propTypes = {
   post: propTypes.object.isRequired,
   submitComment: propTypes.func.isRequired,
   deleteComment: propTypes.func.isRequired,
+  votePost: propTypes.func.isRequired,
 };
 
 export default Post;

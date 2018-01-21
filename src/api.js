@@ -32,6 +32,11 @@ export const editPost = (post) => {
   return http.putJson(`${baseUrl}/posts/${post.id}`, { headers, body: post });
 };
 
+export const votePost = (post, upVote) => {
+  const option = upVote ? "upVote" : "downVote";
+  return http.postJson(`${baseUrl}/posts/${post.id}`, { headers, body: { option } });
+};
+
 export const deletePost = (post) => {
   return http.deleteJson(`${baseUrl}/posts/${post.id}`, { headers });
 };
