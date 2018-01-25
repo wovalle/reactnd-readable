@@ -3,12 +3,16 @@ import { connect } from 'react-redux'
 import propTypes from 'prop-types'
 import { bindActionCreators } from 'redux';
 import { Link } from "react-router-dom";
+import sortBy from 'sort-by';
 
 import * as postActions from '../actions/posts.actions';
-// TODO: Sorting https://codepen.io/jtrumbull/pen/yNwMQr
+import '../styles/global.css';
+
 class PostList extends Component {
   state = {
-    category: ''
+    category: '',
+    direction: 'asc',
+    sortBy: 'timestamp'
   }
 
   componentDidMount() {
@@ -38,6 +42,14 @@ class PostList extends Component {
     this.props.postActions.getPosts(category);
   }
 
+  sortColumn = (e) => {
+    const field = e.target.id;
+    this.setState(state => ({
+      direction: field === this.state.sortBy && state.direction === 'asc' ? 'desc' : 'asc',
+      sortBy: field,
+    }));
+  };
+
   render() {
     const all = {
       name: 'All',
@@ -52,15 +64,57 @@ class PostList extends Component {
       this.props.posts.filter(p => p.category === this.state.category) :
       this.props.posts;
 
-    const postRows = posts.map(p => (
-      <tr className="d-flex" key={p.id}>
-        <td className="col-5"><Link to={`post/${p.id}`}>{p.title}</Link></td>
-        <td className="col-3">{p.author}</td>
-        <td className="col-2">{new Date(p.timestamp).toISOString().slice(0, 10)}</td>
-        <td className="col-1">{p.commentCount}</td>
-        <td className="col-1">{p.voteScore}</td>
-      </tr>
-    ));
+    const postRows = posts
+      .sort(sortBy(`${this.state.direction === 'desc' ? '-' : ''}${this.state.sortBy}`))
+      .map(p => (
+        <tr className="d-flex" key={p.id}>
+          <td className="col-5"><Link to={`post/${p.id}`}>{p.title}</Link></td>
+          <td className="col-3">{p.author}</td>
+          <td className="col-2">{new Date(p.timestamp).toISOString().slice(0, 10)}</td>
+          <td className="col-1">{p.commentCount}</td>
+          <td className="col-1">{p.voteScore}</td>
+        </tr>
+      ));
+
+    const tableHeaders = [
+      {
+        id: 'title',
+        colSize: 5,
+        sortable: true,
+        label: 'Title'
+      },
+      {
+        id: 'author',
+        colSize: 3,
+        sortable: true,
+        label: 'Author'
+      },
+      {
+        id: 'timestamp',
+        colSize: 2,
+        sortable: true,
+        label: 'Date'
+      },
+      {
+        id: 'commentCount',
+        colSize: 1,
+        sortable: true,
+        label: 'Comments'
+      },
+      {
+        id: 'voteScore',
+        colSize: 1,
+        sortable: true,
+        label: 'Score'
+      },
+    ].map(h => (
+      <th
+        key={h.id}
+        id={h.id}
+        scope="col"
+        className={`col-${h.colSize} ${h.sortable && 'sortable'} ${h.sortable && this.state.sortBy === h.id && this.state.direction}`}
+        onClick={this.sortColumn}>{h.label}</th>
+    ))
 
     return (
       <div className="pt-3">
@@ -81,11 +135,7 @@ class PostList extends Component {
             <table className="my-2 table table-hover">
               <thead>
                 <tr className="d-flex">
-                  <th scope="col" className="col-5">Title</th>
-                  <th scope="col" className="col-3">Author</th>
-                  <th scope="col" className="col-2">Date</th>
-                  <th scope="col" className="col-1">Comments</th>
-                  <th scope="col" className="col-1">Score</th>
+                  {tableHeaders}
                 </tr>
               </thead>
               <tbody>

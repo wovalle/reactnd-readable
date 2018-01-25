@@ -1,0 +1,16 @@
+th.sortable {
+  position: relative;
+  cursor: pointer;
+}
+
+th.sortable.asc::after {
+  content: "▲";
+}
+
+th.sortable.desc::after {
+  content: "▼";
+}
+
+th.sortable:hover::after {
+  color: gray;
+}
