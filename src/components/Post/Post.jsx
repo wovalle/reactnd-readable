@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import CommentsContainer from '../CommentsContainer/CommentsContainer';
+import VoteCount from '../VoteCount/VoteCount';
 
 const Post = ({ post, comments, deletePost, submitComment, deleteComment, votePost, voteComment }) => {
   const timestamp = new Date(post.timestamp);
@@ -21,12 +22,6 @@ const Post = ({ post, comments, deletePost, submitComment, deleteComment, votePo
     }
   }
 
-  const voteCurrentPost = (up) => {
-    return (e) => {
-      votePost(post, up);
-    }
-  }
-
   return (
     <div className="post">
       <div className="col-md-10 offset-md-1">
@@ -37,9 +32,10 @@ const Post = ({ post, comments, deletePost, submitComment, deleteComment, votePo
           </div>
           <div className="col-md-2 offset-md-2">
             <div className="vote-count float-right">
-              <i onClick={voteCurrentPost(true)} className="fa fa-chevron-up" aria-hidden="true"></i>
-              <span className="px-1">{post.voteScore}</span>
-              <i onClick={voteCurrentPost(false)} className="fa fa-chevron-down" aria-hidden="true"></i>
+              <VoteCount
+                count={post.voteScore}
+                votePost={(up) => () => votePost(post, up)}
+              />
             </div>
           </div>
         </div>
