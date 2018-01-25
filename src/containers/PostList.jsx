@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux';
 import { Link } from "react-router-dom";
 import sortBy from 'sort-by';
 
+import VoteCount from '../components/VoteCount/VoteCount';
+
 import * as postActions from '../actions/posts.actions';
 import '../styles/global.css';
 
@@ -68,18 +70,23 @@ class PostList extends Component {
       .sort(sortBy(`${this.state.direction === 'desc' ? '-' : ''}${this.state.sortBy}`))
       .map(p => (
         <tr className="d-flex" key={p.id}>
-          <td className="col-5"><Link to={`${p.category}/${p.id}`}>{p.title}</Link></td>
+          <td className="col-4"><Link to={`${p.category}/${p.id}`}>{p.title}</Link></td>
           <td className="col-3">{p.author}</td>
           <td className="col-2">{new Date(p.timestamp).toISOString().slice(0, 10)}</td>
-          <td className="col-1">{p.commentCount}</td>
-          <td className="col-1">{p.voteScore}</td>
-        </tr>
+          <td className="col-2">{p.commentCount}</td>
+          <td className="col-1">
+            <VoteCount
+              count={p.voteScore}
+              votePost={(up) => () => this.props.postActions.votePost(p, up)}
+            />
+          </td>
+        </tr >
       ));
 
     const tableHeaders = [
       {
         id: 'title',
-        colSize: 5,
+        colSize: 4,
         sortable: true,
         label: 'Title'
       },
@@ -97,7 +104,7 @@ class PostList extends Component {
       },
       {
         id: 'commentCount',
-        colSize: 1,
+        colSize: 2,
         sortable: true,
         label: 'Comments'
       },
