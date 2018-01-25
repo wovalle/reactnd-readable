@@ -12,9 +12,9 @@ const Routes = () => {
   return (
     <Switch>
       <DefaultLayout exact path="/" component={PostList} />
-      <DefaultLayout exact path="/post/:id" component={PostContainer} />
       <DefaultLayout exact path="/edit/:id" component={EditPostContainer} />
       <DefaultLayout exact path="/new" component={NewPostContainer} />
+      <DefaultLayout exact path="/:category/:id" component={PostContainer} />
       <DefaultLayout exact path="/:category" component={PostList} />
       <DefaultLayout component={NotFound} />
     </Switch>

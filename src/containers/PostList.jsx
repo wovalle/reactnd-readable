@@ -68,7 +68,7 @@ class PostList extends Component {
       .sort(sortBy(`${this.state.direction === 'desc' ? '-' : ''}${this.state.sortBy}`))
       .map(p => (
         <tr className="d-flex" key={p.id}>
-          <td className="col-5"><Link to={`post/${p.id}`}>{p.title}</Link></td>
+          <td className="col-5"><Link to={`${p.category}/${p.id}`}>{p.title}</Link></td>
           <td className="col-3">{p.author}</td>
           <td className="col-2">{new Date(p.timestamp).toISOString().slice(0, 10)}</td>
           <td className="col-1">{p.commentCount}</td>
