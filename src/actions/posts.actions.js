@@ -61,7 +61,7 @@ export const editPost = (post, push) => {
       post: editedPost
     });
 
-    push('/');
+    push(`/${editedPost.category}/${editedPost.id}`);
   }
 }
 
@@ -87,7 +87,8 @@ export const createPost = (post, push) => {
     const createdPost = await api.createPost({
       id: uuidv1(),
       timestamp: Date.now().valueOf(),
-      ...post
+      ...post,
+      category: post.category || 'udacity',
     });
 
     dispatch({
@@ -95,7 +96,7 @@ export const createPost = (post, push) => {
       post: createdPost
     });
 
-    push('/');
+    push(`${createdPost.category}/${createdPost.id}`);
   }
 }
 
