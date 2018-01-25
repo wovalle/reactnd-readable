@@ -38,7 +38,12 @@ export const getPost = (id) => {
   return async (dispatch, _, { api, schema }) => {
     dispatch({ type: actions.posts.get });
 
-    const post = await api.getPost(id);
+    let post = await api.getPost(id);
+
+    if (!post.id) {
+      // Post was not found or deleted
+      post = { id, deleted: true }
+    }
 
     dispatch({
       type: actions.entities.add,

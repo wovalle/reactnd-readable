@@ -3,6 +3,8 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux'
 
 import Post from '../components/Post/Post';
+import NotFound from '../components/shared/NotFound';
+
 import { getPost, deletePost, votePost } from '../actions/posts.actions';
 import { getComments, submitComment, deleteComment, voteComment } from '../actions/comments.actions';
 
@@ -15,6 +17,10 @@ class PostContainer extends Component {
   render() {
     if (!this.props.post) {
       return null;
+    }
+
+    if (this.props.post.deleted) {
+      return <NotFound />;
     }
 
     const post = (
@@ -50,7 +56,6 @@ const mapStateToProps = (state, props) => ({
   comments: Object.keys(state.comments)
     .map(c => state.comments[c])
     .filter(c => c.parentId === props.match.params.id)
-    .filter(c => !c.deleted)
 });
 
 const mapDispatchToProps = {

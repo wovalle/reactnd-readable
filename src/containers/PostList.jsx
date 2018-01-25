@@ -89,9 +89,9 @@ class PostList extends Component {
               votePost={(up) => () => this.props.postActions.votePost(p, up)}
             />
           </td>
-          <td className="col-1 d-flex">
-            <Link to={`/edit/${p.id}`}><i class="fa fa-pencil fa-lg primary mx-1" aria-hidden="true"></i></Link>
-            <a href="#" onClick={this.onDelete(p)}><i class="fa fa-trash-o fa-lg danger mx-1" aria-hidden="true"></i></a>
+          <td className="col-1">
+            <Link to={`/edit/${p.id}`}><i className="fa fa-pencil fa-lg primary mx-1" aria-hidden="true"></i></Link>
+            <a href="#" onClick={this.onDelete(p)}><i className="fa fa-trash-o fa-lg danger mx-1" aria-hidden="true"></i></a>
           </td>
         </tr >
       ));
@@ -127,14 +127,20 @@ class PostList extends Component {
         sortable: true,
         label: 'Score'
       },
+      {
+        id: 'actions',
+        colSize: 1,
+        sortable: false,
+        label: ''
+      }
     ].map(h => (
       <th
         key={h.id}
         id={h.id}
         scope="col"
-        className={`col-${h.colSize} ${h.sortable && 'sortable'} ${h.sortable && this.state.sortBy === h.id && this.state.direction}`}
+        className={`col-${h.colSize} ${h.sortable ? 'sortable' : ''} ${h.sortable && this.state.sortBy === h.id ? this.state.direction : ''}`}
         onClick={this.sortColumn}>{h.label}</th>
-    ))
+    ));
 
     return (
       <div className="pt-3">
