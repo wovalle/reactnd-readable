@@ -16,15 +16,14 @@ class EditPostContainer extends Component {
   }
 
   render() {
-    let elem = null;
-    if (this.props.post)
-      elem = (
-        <EditPost
-          post={this.props.post}
-          savePost={this.savePost}
-          isEdit
-        />
-      );
+    let elem = this.props.post ? (
+      <EditPost
+        post={this.props.post}
+        savePost={this.savePost}
+        isEdit
+      />
+    ) : null;
+
     return (
       elem
     );

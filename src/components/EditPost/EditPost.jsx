@@ -39,7 +39,7 @@ class EditPost extends Component {
 
   render() {
 
-    let categoryControl = null;
+    let categoryControl = undefined;
 
     // If we're editing a post, the category shouldn't be a select
     // because the api doesn't allow to edit categories 

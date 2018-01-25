@@ -11,14 +11,12 @@ class CommentsContainer extends Component {
   }
 
   editComment = (comment) => {
-    return () => {
-      this.setState({
-        id: comment.id,
-        body: comment.body,
-        author: comment.author,
-        editing: true,
-      });
-    }
+    this.setState({
+      id: comment.id,
+      body: comment.body,
+      author: comment.author,
+      editing: true,
+    });
   }
 
   onInputChange = (e) => {
@@ -56,27 +54,29 @@ class CommentsContainer extends Component {
   render() {
     const { comments } = this.props;
 
-    const commentElems = comments.map(c => (
-      <div className="comment media mb-4" key={c.id}>
-        <div className="media-body">
-          <div className="header">
-            <h5 className="t-0 d-inline">{c.author}</h5>
-            <div className="vote-count d-inline pl-4">
-              <VoteCount
-                count={c.voteScore}
-                voteAction={(up) => () => this.props.voteComment(c, up)}
-
-              />
+    const commentElems = comments.map(c => {
+      const { id, author, voteScore, body } = c;
+      return (
+        <div className="comment media mb-4" key={id}>
+          <div className="media-body">
+            <div className="header">
+              <h5 className="t-0 d-inline">{author}</h5>
+              <div className="vote-count d-inline pl-4">
+                <VoteCount
+                  count={voteScore}
+                  voteAction={(up) => () => this.props.voteComment(c, up)}
+                />
+              </div>
+              <div className="actions-buttons d-inline float-right">
+                <a href="#" className="pr-1" onClick={() => this.editComment(c)}>edit</a>
+                <a href="#" className="pr-1" onClick={this.deleteComment(c)}>delete</a>
+              </div>
             </div>
-            <div className="actions-buttons d-inline float-right">
-              <a href="#" className="pr-1" onClick={this.editComment(c)}>edit</a>
-              <a href="#" className="pr-1" onClick={this.deleteComment(c)}>delete</a>
-            </div>
+            {body}
           </div>
-          {c.body}
         </div>
-      </div>
-    ));
+      )
+    });
 
     return (
       <div className="col-md-8 offset-md-2">
