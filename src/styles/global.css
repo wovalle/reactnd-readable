@@ -3,12 +3,20 @@ th.sortable {
   cursor: pointer;
 }
 
+th.sortable::after {
+  font-family: FontAwesome;
+  content: "\f0dc";
+  position: absolute;
+  right: 8px;
+  color: lightgray;
+}
+
 th.sortable.asc::after {
-  content: "▲";
+  content: "\f0d8";
 }
 
 th.sortable.desc::after {
-  content: "▼";
+  content: "\f0d7";
 }
 
 th.sortable:hover::after {
