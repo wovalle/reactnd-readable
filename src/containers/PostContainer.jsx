@@ -56,6 +56,7 @@ const mapStateToProps = (state, props) => ({
   comments: Object.keys(state.comments)
     .map(c => state.comments[c])
     .filter(c => c.parentId === props.match.params.id)
+    .filter(c => !c.deleted)
 });
 
 const mapDispatchToProps = {

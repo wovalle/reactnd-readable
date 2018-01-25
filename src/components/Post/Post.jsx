@@ -28,14 +28,17 @@ const Post = ({ post, comments, deletePost, submitComment, deleteComment, votePo
         <div className="row">
           <div className="col-md-8">
             <h2>{post.title}</h2>
-            <h6>Category: {post.category} | Posted by {post.author} on {date} at {time}</h6>
+            <h6>Category: {post.category} | Posted by {post.author} on {date} at {time} | Comments : <span className="bold">{comments.length}</span></h6>
           </div>
           <div className="col-md-2 offset-md-2">
-            <div className="vote-count float-right">
+            <div className="vote-comment-count float-right">
               <VoteCount
                 count={post.voteScore}
                 votePost={(up) => () => votePost(post, up)}
               />
+              <div className="comment-count">
+                <small></small>
+              </div>
             </div>
           </div>
         </div>
