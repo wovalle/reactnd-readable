@@ -12,12 +12,27 @@ class PostList extends Component {
   }
 
   componentDidMount() {
+    const { category } = this.props.match.params;
     this.props.postActions.getCategories();
-    this.props.postActions.getPosts();
+    this.props.postActions.getPosts(category);
+    this.setState({ category });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.match.params.category !== nextProps.match.params.category) {
+      this.setState({ category: nextProps.match.params.category });
+    }
   }
 
   filterByCategory = (e) => {
     const category = e.target.value;
+
+    if (!category) {
+      this.props.history.push(`/`)
+    } else {
+      this.props.history.push(`/category/${category}`);
+    }
+
     this.setState({ category });
     // Optimist approach, first filter and then do a roundtrip to api
     this.props.postActions.getPosts(category);
@@ -52,7 +67,7 @@ class PostList extends Component {
         <div className="row">
           <div className="col-md-9 col-xs-6">
             <label htmlFor="categories" className="pr-1">Categories:</label>
-            <select className="custom-select" id="categories" onChange={this.filterByCategory}>
+            <select className="custom-select" id="categories" onChange={this.filterByCategory} value={this.state.category}>
               {categories}
             </select>
           </div>
@@ -90,11 +105,12 @@ PostList.propTypes = {
   posts: propTypes.array.isRequired,
 };
 
-// TODO: [OUTOFSCOPE] memoized selectors
-const mapStateToProps = (state) => ({
-  categories: Object.keys(state.categories).map(k => state.categories[k]),
-  posts: Object.keys(state.posts).map(k => state.posts[k]).filter(p => !p.deleted),
-});
+const mapStateToProps = (state) => {
+  return {
+    categories: Object.keys(state.categories).map(k => state.categories[k]),
+    posts: Object.keys(state.posts).map(k => state.posts[k]).filter(p => !p.deleted),
+  }
+};
 
 const mapDispatchToProps = (dispatch) => ({
   postActions: bindActionCreators(postActions, dispatch)
