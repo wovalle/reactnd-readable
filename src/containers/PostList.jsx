@@ -30,7 +30,7 @@ class PostList extends Component {
     if (!category) {
       this.props.history.push(`/`)
     } else {
-      this.props.history.push(`/category/${category}`);
+      this.props.history.push(`/${category}`);
     }
 
     this.setState({ category });
