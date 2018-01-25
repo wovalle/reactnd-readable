@@ -52,6 +52,15 @@ class PostList extends Component {
     }));
   };
 
+  onDelete = (post) => {
+    return (e) => {
+      e.preventDefault();
+      if (window.confirm('Do you really want to delete this post?')) {
+        this.props.postActions.deletePost(post, this.props.history.push);
+      }
+    };
+  }
+
   render() {
     const all = {
       name: 'All',
@@ -79,6 +88,10 @@ class PostList extends Component {
               count={p.voteScore}
               votePost={(up) => () => this.props.postActions.votePost(p, up)}
             />
+          </td>
+          <td className="col-1 d-flex">
+            <Link to={`/edit/${p.id}`}><i class="fa fa-pencil fa-lg primary mx-1" aria-hidden="true"></i></Link>
+            <a href="#" onClick={this.onDelete(p)}><i class="fa fa-trash-o fa-lg danger mx-1" aria-hidden="true"></i></a>
           </td>
         </tr >
       ));
@@ -136,7 +149,6 @@ class PostList extends Component {
             <Link className="btn btn-outline-primary float-right" to={'/new'}>Create New Post</Link>
           </div>
         </div>
-
         <div className="row">
           <div className="col-md-12">
             <table className="my-2 table table-hover">

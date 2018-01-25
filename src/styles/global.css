@@ -22,3 +22,11 @@ th.sortable.desc::after {
 th.sortable:hover::after {
   color: gray;
 }
+
+.primary {
+  color: var(--secondary);
+}
+
+.danger {
+  color: var(--danger);
+}
