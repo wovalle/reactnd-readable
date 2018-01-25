@@ -106,8 +106,6 @@ class EditPost extends Component {
   }
 }
 
-//TODO: If is not edit, make categories required
-
 EditPost.propTypes = {
   post: propTypes.object.isRequired,
   categories: propTypes.array,

@@ -37,7 +37,6 @@ NewPostContainer.propTypes = {
   createPost: propTypes.func.isRequired,
 };
 
-// TODO: [OUTOFSCOPE] memoized selectors
 const mapStateToProps = (state, props) => ({
   categories: Object.keys(state.categories).map(k => state.categories[k]),
 });

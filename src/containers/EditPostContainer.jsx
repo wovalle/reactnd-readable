@@ -36,7 +36,6 @@ EditPostContainer.propTypes = {
   editPost: propTypes.func.isRequired,
 };
 
-// TODO: [OUTOFSCOPE] memoized selectors
 const mapStateToProps = (state, props) => ({
   post: state.posts[props.match.params.id]
 });
