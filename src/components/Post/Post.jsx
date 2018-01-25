@@ -31,14 +31,11 @@ const Post = ({ post, comments, deletePost, submitComment, deleteComment, votePo
             <h6>Category: {post.category} | Posted by {post.author} on {date} at {time} | Comments : <span className="bold">{comments.length}</span></h6>
           </div>
           <div className="col-md-2 offset-md-2">
-            <div className="vote-comment-count float-right">
+            <div className="vote-count">
               <VoteCount
                 count={post.voteScore}
-                votePost={(up) => () => votePost(post, up)}
+                voteAction={(up) => () => votePost(post, up)}
               />
-              <div className="comment-count">
-                <small></small>
-              </div>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 
+import VoteCount from '../VoteCount/VoteCount';
 class CommentsContainer extends Component {
   state = {
     body: '',
@@ -17,12 +18,6 @@ class CommentsContainer extends Component {
         author: comment.author,
         editing: true,
       });
-    }
-  }
-
-  voteCurrentComment = (comment, up) => {
-    return (e) => {
-      this.props.voteComment(comment, up);
     }
   }
 
@@ -67,9 +62,11 @@ class CommentsContainer extends Component {
           <div className="header">
             <h5 className="t-0 d-inline">{c.author}</h5>
             <div className="vote-count d-inline pl-4">
-              <i onClick={this.voteCurrentComment(c, true)} className="fa fa-chevron-up" aria-hidden="true"></i>
-              <span className="px-1">{c.voteScore}</span>
-              <i onClick={this.voteCurrentComment(c, false)} className="fa fa-chevron-down" aria-hidden="true"></i>
+              <VoteCount
+                count={c.voteScore}
+                voteAction={(up) => () => this.props.voteComment(c, up)}
+
+              />
             </div>
             <div className="actions-buttons d-inline float-right">
               <a href="#" className="pr-1" onClick={this.editComment(c)}>edit</a>

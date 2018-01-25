@@ -86,7 +86,7 @@ class PostList extends Component {
           <td className="col-1">
             <VoteCount
               count={p.voteScore}
-              votePost={(up) => () => this.props.postActions.votePost(p, up)}
+              voteAction={(up) => () => this.props.postActions.votePost(p, up)}
             />
           </td>
           <td className="col-1">
